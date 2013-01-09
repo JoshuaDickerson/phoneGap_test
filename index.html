@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+ <head>
+  <title>PhoneGap</title>
+  <script type="text/javascript" charset="utf-8" src="cordova-2.3.0.js"></script>
+  <script type="text/javascript" charset="utf-8" src="jquery-1.8.0.min.js"></script>
+  <script type="text/javascript">
+      // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+    
+    	$('#clear').click(function(){
+    		$('#output').html("");
+    	});
+    	
+    	$('#camera').click(function(){
+    		navigator.camera.getPicture(onCamSuccess, onCamFail, {
+    			quality: 50,
+    			destinationType: Camera.DestinationType.DATA_URL
+    		});
+    	});
+    	
+        $('#beep').click(function(){
+			navigator.notification.beep(1);
+        });
+        
+        $('#location').click(function(){
+			navigator.geolocation.getCurrentPosition(onNavSuccess, onNavFail);
+        });
+        
+        $('#accelerometer').click(function(){
+        	navigator.accelerometer.getCurrentAcceleration(onAccelSuccess, onAccelFail);
+        });
+        
+        function onAccelSuccess(acceleration){
+        	$('#output').append("X: "+acceleration.x+"<br />");
+        	$('#output').append("Y: "+acceleration.y+"<br />");
+        	$('#output').append("Z: "+acceleration.z+"<br />");
+        }
+        
+        function onAccelFail(){
+        	$('#output').append("accel failed");
+        }
+        
+        function onNavSuccess(position){
+        	$('#output').append("lat: "+position.coords.latitude+"<br />");
+        	$('#output').append("lon: "+position.coords.longitude+"<br />");
+        	$('#output').append("alt: "+position.coords.altitude+"<br />");
+        }
+        
+        function onNavFail(){
+        	$('#output').append("nav failed");
+        }
+        
+        function onCamSuccess(imageData){
+        	$('#output').html("<img style='width:80%' src='data:image/jpeg;base64,"+imageData+"'>");
+        }
+        
+        function onCamFail(){
+        	$('#output').html("failed");
+        }
+    }
+  </script>
+  <style type="text/css">
+  	body{
+  		text-align:center;
+  		margin:0px;
+  		padding:0px;
+  	}
+  	ul{
+  		list-style-type:none;
+  		margin:0px;
+  		padding:0px;
+  	}
+  	
+  	input[type='button']{
+  		width:200px;
+  		height:60px;
+  		}
+  		
+  	#output{
+  		width:80%;
+  		padding:10px 0px 10px 0px;
+  		border:solid 1px #999;
+  		margin:auto;
+  		margin-top:20px;
+  	}
+  	
+  </style>
+ </head>
+ <body>
+    <h3>PhoneGap Demo</h3>
+    <ul>
+    	<li><input type='button' value='beep' id='beep'></li>
+		<li><input type='button' value='location' id='location'></li>
+		<li><input type='button' value='camera' id='camera'></li>
+		<li><input type='button' value='accelerometer' id='accelerometer'></li>
+		<li><br /><input type='button' value='clear' id='clear'></li>
+	</ul>
+	
+	<div id="output">
+	</div>
+ </body>
+</html>
