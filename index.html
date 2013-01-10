@@ -16,28 +16,28 @@ document.addEventListener("deviceready", onDeviceReady, false);
 
 function onDeviceReady() {
 
-    navigator.geolocation.getCurrentPosition(onNavSuccess, onNavFail);
+  navigator.geolocation.getCurrentPosition(onNavSuccess, onNavFail);
 
-    function initialize(lat, lon) {
-        var mapOptions = {
-          center: new google.maps.LatLng(lat, lon),
-          zoom: 16,
-          mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
-            mapOptions);
+    // function initialize(lat, lon) {
+    //     var mapOptions = {
+    //       center: new google.maps.LatLng(lat, lon),
+    //       zoom: 16,
+    //       mapTypeId: google.maps.MapTypeId.ROADMAP
+    //     };
+    //     var map = new google.maps.Map(document.getElementById("map_canvas"),
+    //         mapOptions);
 
-        // alert("working");
-      }
+    //     // alert("working");
+    //   }
 
-    function onNavSuccess(position){
-      // alert("working");
-      initialize(position.coords.latitude, position.coords.longitude);
-    }
+  function onNavSuccess(position){
+    alert("working");
+      // initialize(position.coords.latitude, position.coords.longitude);
+  }
 
-    function onNavFail(position){
-      alert("Navigation Failed");
-    }
+  function onNavFail(position){
+    alert("Navigation Failed");
+  }
 }
     </script>
 </head>
