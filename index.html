@@ -28,10 +28,11 @@ function onDeviceReady() {
       }
 
     function onNavSuccess(position){
-      initialize(position.coords.latitude, position.coords.longitude);
+      alert("working");
+      // initialize(position.coords.latitude, position.coords.longitude);
     }
 
-    function onNavFail(){
+    function onNavFail(position){
       alert("Navigation Failed");
     }
 }
