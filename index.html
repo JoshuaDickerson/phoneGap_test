@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style type="text/css">
+  <style type="text/css">
       html { height: 100% }
       body { height: 100%; margin: 0; padding: 0 }
       #map_canvas { height: 100% }
     </style>
-	<script type="text/javascript"
+  <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?sensor=false">
     </script>
 
     <script type="text/javascript">
-    function initialize() {
+function onDeviceReady() {
+     
+      navigator.geolocation.getCurrentPosition(onNavSuccess, onNavFail);
+
+
+    function initialize(lat, lon) {
         var mapOptions = {
-          center: new google.maps.LatLng(44.4785116, -73.2016786),
+          center: new google.maps.LatLng(lat, lon),
           zoom: 16,
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
@@ -22,11 +27,16 @@
 
         // alert("working");
       }
+
+    function onNavSuccess(){
+      initialize(position.coords.latitude, position.coords.longitude);
+    }
+}
     </script>
 </head>
 
-<body onload="initialize()">
-	<div id="map_canvas" height="100" width="100"></div>
+<body>
+  <div id="map_canvas" height="100" width="100"></div>
 </body>
 
 </html>
