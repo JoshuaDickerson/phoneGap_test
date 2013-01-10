@@ -12,9 +12,8 @@
 
     <script type="text/javascript">
 function onDeviceReady() {
-     
-      navigator.geolocation.getCurrentPosition(onNavSuccess, onNavFail);
 
+    navigator.geolocation.getCurrentPosition(onNavSuccess, onNavFail);
 
     function initialize(lat, lon) {
         var mapOptions = {
@@ -30,6 +29,10 @@ function onDeviceReady() {
 
     function onNavSuccess(){
       initialize(position.coords.latitude, position.coords.longitude);
+    }
+
+    function onNavFail(){
+      alert("Navigation Failed");
     }
 }
     </script>
